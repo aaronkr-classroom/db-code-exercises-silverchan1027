@@ -41,17 +41,20 @@ Products → Orders : 1:N 관계
 
 4. sql 작성
 -- 1. 테이블 생성
+   
 CREATE TABLE Users (
 user_id INT PRIMARY KEY,
 name VARCHAR(50),
 email VARCHAR(100)
 );
+
 CREATE TABLE Products (
 product_id INT PRIMARY KEY,
 product_name VARCHAR(100),
 price INT,
 stock INT
 );
+
 CREATE TABLE Orders (
 order_id INT PRIMARY KEY,
 user_id INT,
