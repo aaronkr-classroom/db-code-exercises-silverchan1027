@@ -66,10 +66,15 @@ FOREIGN KEY (product_id) REFERENCES Products(product_id)
 
 데이터 삽입
 INSERT INTO Users VALUES (1, 'Kim', 'kim@example.com');
+
 INSERT INTO Users VALUES (2, 'eun', 'eun@example.com');
+
 INSERT INTO Products VALUES (1, 'note', 5000, 10);
+
 INSERT INTO Products VALUES (2, 'ruler', 2000, 20);
+
 INSERT INTO Orders VALUES (1, 1, 1, 1);
+
 INSERT INTO Orders VALUES (2, 2, 2, 2);
 
 조회
