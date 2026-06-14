@@ -72,52 +72,65 @@ CREATE TABLE lab (
 ```
 
 3. 02번 문제에서 생성한 lab 테이블에 숫자 타입 (4바이트)의 ‘면적 (lab_size)’ 열을 추가하고， 디폴트 값을 '50'으로 설정히는 SQL 문을 작성하시오.
+
 ALTER TABLE lab
 ADD lab_size INTEGER DEFAULT 50;
+
 4. 02번 문제에서 생성한 lab 테이블의 ‘호실 (rooffi_id) ’ 열에 rooffi_id_idx라는 인텍스를 생성하는 SQL 문을 작성하시오.
+
 CREATE INDEX room_id_idx
 ON lab(room_id);
+
 5. 02번 문제에서 생성한 1ab 태이블에 다음 데이터를 삽입하는 SQL 문을 작성하시오.
 
 > 실험실번호: 188, 명칭: 가상현실/ 건물명: 2공학관/ 호실: B283 , 소속학과: comp
 > 실험실번호: 118, 명칭: 인공지능/ 건물명: 2공학관/ 호실: A181 , 소속학과: comp
 >
 > INSERT INTO lab
-VALUES (100, '가상현실', '2공학관', 'B203', 'comp', 50);
-
-INSERT INTO lab
-VALUES (110, '인공지능', '2공학관', 'A101', 'comp', 50);
+> VALUES (100, '가상현실', '2공학관', 'B203', 'comp', 50);
+> INSERT INTO lab
+> VALUES (110, '인공지능', '2공학관', 'A101', 'comp', 50);
 
 6. 02번 문제에서 생성한 1ab 테이블에 건물명이 ‘2공학관’인 모든 실험실의 명칭과 소속학과변호를 검색하는 SQL 문을 작성하시오.
+
 SELECT name, dept_id
 FROM lab
 WHERE building = '2공학관';
+
 7. 02번 문제에서 생성한 1ab 데이블에 명칭이 ’인공지능’인 실험실의 호실을 ‘B102’로 변경하는 SQL 문을 작성하시오.
+
 UPDATE lab
 SET room_id = 'B102'
 WHERE name = '인공지능';
+
 8. 02변 문제에서 생성한 1ab 태이블을 기초로 하여 소속학과 id가 ‘comp’인 모든 실험실의 명칭 (name)， 호실셀(room id)，면적 (lab_size)을 포함승하}뜯는 com_lab_view라는 뷰를 생성하는 SQL 문을 작성하시오.
+
 CREATE VIEW com_lab_view AS
 SELECT name, room_id, lab_size
 FROM lab
 WHERE dept_id = 'comp';
+
 9. 02번 문제에서 생성한 lab 태이블의 기본키인 실험실번호(lab_num) 값을 자동으로 생성하는 데 사용할 시뭔스인 1ab_num_seq를 생성하려고 한다. 첫 번째 시뭔스 값은 120이고， 최대 990까지 10씩 증가시키고， 최뱃값에 도달한 후에 다시 첫 번째 시권스 번호부터 생성하지 않고， 시펀스 값을미리 생성하지 않도록시뭔스를정의하는 SQL 문을작성하시오.
+
 CREATE SEQUENCE lab_num_seq
 INCREMENT BY 10
 START WITH 120
 MAXVALUE 990
 NO CYCLE
 CACHE 1;
+
 10. 09번 문제에서 생성한 시권스인 lab_num_seq를 이용해서 2변 문제에서 생성한 lab 테이블에 다음과 같은 데이터를 삽입하는 SQL 문을 작성하시오.
 
 > 명칭: 네트워크/ 건물명: 2공학관/ 호실: B281 , 소속학과: comp
+> --oracle 방식
 > INSERT INTO lab (lab_num, name, building, room_id, dept_id, lab_size)
-VALUES (lab_num_seq.NEXTVAL, '네트워크', '2공학관', 'B201', 'comp', 50); --oracle 방식
->
+> VALUES (lab_num_seq.NEXTVAL, '네트워크', '2공학관', 'B201', 'comp', 50);
 > INSERT INTO lab (lab_num, name, building, room_id, dept_id, lab_size)
-VALUES (nextval('lab_num_seq'), '네트워크', '2공학관', 'B201', 'comp', 50); --PosgreSQL 방식
+>VALUES (nextval('lab_num_seq'), '네트워크', '2공학관', 'B201', 'comp', 50);
+> --PosgreSQL 방식
 
 11. 앞에서 생성한테이블과인텍스， 뷰， 시권스를모두삭제하는 SQL 문을작성하시오.
+
 DROP VIEW com_lab_view;
 DROP INDEX room_id_idx;
 DROP SEQUENCE lab_num_seq;
